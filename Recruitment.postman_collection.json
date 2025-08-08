@@ -1,0 +1,654 @@
+{
+  "info": {
+    "name": "Recruitment & Onboarding",
+    "_postman_id": "8b7b9b7a-1b0a-4b9a-9f6f-1f9e8a7c1234",
+    "description": "Recruitment & Onboarding module API collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "businessId", "value": "00000000-0000-0000-0000-000000000001" },
+    { "key": "branchId", "value": "00000000-0000-0000-0000-000000000002" },
+    { "key": "requisitionId", "value": "00000000-0000-0000-0000-000000000003" },
+    { "key": "vacancyId", "value": "00000000-0000-0000-0000-000000000004" },
+    { "key": "applicationId", "value": "00000000-0000-0000-0000-000000000005" },
+    { "key": "interviewId", "value": "00000000-0000-0000-0000-000000000006" },
+    { "key": "offerId", "value": "00000000-0000-0000-0000-000000000007" },
+    { "key": "onboardingId", "value": "00000000-0000-0000-0000-000000000008" },
+    { "key": "visaId", "value": "00000000-0000-0000-0000-000000000009" },
+    { "key": "userId", "value": "00000000-0000-0000-0000-000000000010" },
+    { "key": "departmentId", "value": "00000000-0000-0000-0000-000000000011" }
+  ],
+  "item": [
+    {
+      "name": "Job Requisitions",
+      "item": [
+        {
+          "name": "List Requisitions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions?business_id={{businessId}}&branch_id={{branchId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "requisitions"],
+              "query": [
+                { "key": "business_id", "value": "{{businessId}}" },
+                { "key": "branch_id", "value": "{{branchId}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Requisition",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requested_by\": \"{{userId}}\",\n  \"department_id\": \"{{departmentId}}\",\n  \"job_title\": \"Software Engineer\",\n  \"number_of_vacancies\": 2,\n  \"employment_type\": \"Full-Time\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "requisitions"]
+            }
+          }
+        },
+        {
+          "name": "Get Requisition",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Requisition",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"job_title\": \"Senior Software Engineer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve Requisition",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}/approve",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}",
+                "approve"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reject Requisition",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}/reject",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}",
+                "reject"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Close Requisition",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}/close",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}",
+                "close"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vacancies",
+      "item": [
+        {
+          "name": "List Vacancies for Requisition",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/requisitions/{{requisitionId}}/vacancies",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "requisitions",
+                "{{requisitionId}}",
+                "vacancies"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Vacancy",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requisition_id\": \"{{requisitionId}}\",\n  \"portal_type\": \"Internal\",\n  \"posted_by\": \"{{userId}}\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/vacancies",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "vacancies"]
+            }
+          }
+        },
+        {
+          "name": "Get Vacancy",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/vacancies/{{vacancyId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "vacancies", "{{vacancyId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Vacancy",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"portal_type\": \"External\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/vacancies/{{vacancyId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "vacancies", "{{vacancyId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "List Applications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/vacancies/{{vacancyId}}/applications",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "vacancies",
+                "{{vacancyId}}",
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Application",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vacancy_id\": \"{{vacancyId}}\",\n  \"full_name\": \"Candidate A\",\n  \"email\": \"a@example.com\",\n  \"resume_url\": \"https://storage/resume.pdf\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "applications"]
+            }
+          }
+        },
+        {
+          "name": "Get Application",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Application",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"current_position\": \"Senior Developer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Set Application Status",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Interview Scheduled\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}",
+                "status"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Interviews",
+      "item": [
+        {
+          "name": "List Interviews",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}/interviews",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}",
+                "interviews"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Interview",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"application_id\": \"{{applicationId}}\",\n  \"scheduled_by\": \"{{userId}}\",\n  \"scheduled_at\": \"2025-01-01T10:00:00Z\",\n  \"interview_type\": \"Phone\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/interviews",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "interviews"]
+            }
+          }
+        },
+        {
+          "name": "Update Interview",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remarks\": \"Rescheduled\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/interviews/{{interviewId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "interviews", "{{interviewId}}"]
+            }
+          }
+        },
+        {
+          "name": "Complete Interview",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"score\": 4.5,\n  \"remarks\": \"Strong communication\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/interviews/{{interviewId}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "interviews",
+                "{{interviewId}}",
+                "complete"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel Interview",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/interviews/{{interviewId}}/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "interviews",
+                "{{interviewId}}",
+                "cancel"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Offers",
+      "item": [
+        {
+          "name": "List Offers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}/offers",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}",
+                "offers"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Offer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"application_id\": \"{{applicationId}}\",\n  \"offer_date\": \"2025-01-10\",\n  \"offered_by\": \"{{userId}}\",\n  \"offer_document_url\": \"https://storage/offer.pdf\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/offers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "offers"]
+            }
+          }
+        },
+        {
+          "name": "Update Offer",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offer_document_url\": \"https://storage/offer_v2.pdf\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/offers/{{offerId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "offers", "{{offerId}}"]
+            }
+          }
+        },
+        {
+          "name": "Accept Offer",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/offers/{{offerId}}/accept",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "offers", "{{offerId}}", "accept"]
+            }
+          }
+        },
+        {
+          "name": "Decline Offer",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/offers/{{offerId}}/decline",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "offers", "{{offerId}}", "decline"]
+            }
+          }
+        },
+        {
+          "name": "Withdraw Offer",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/offers/{{offerId}}/withdraw",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "offers",
+                "{{offerId}}",
+                "withdraw"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Onboarding",
+      "item": [
+        {
+          "name": "List Onboarding",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}/onboarding",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}",
+                "onboarding"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Onboarding",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"application_id\": \"{{applicationId}}\",\n  \"onboarding_steps\": \"Account,Device,Orientation\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/onboarding",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "onboarding"]
+            }
+          }
+        },
+        {
+          "name": "Update Onboarding",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/onboarding/{{onboardingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "onboarding", "{{onboardingId}}"]
+            }
+          }
+        },
+        {
+          "name": "Complete Onboarding",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/onboarding/{{onboardingId}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "onboarding",
+                "{{onboardingId}}",
+                "complete"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Terminate Onboarding",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/onboarding/{{onboardingId}}/terminate",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "onboarding",
+                "{{onboardingId}}",
+                "terminate"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Visa",
+      "item": [
+        {
+          "name": "List Visa",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/applications/{{applicationId}}/visa",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "recruitment",
+                "applications",
+                "{{applicationId}}",
+                "visa"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Visa",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"application_id\": \"{{applicationId}}\",\n  \"status\": \"Not Started\",\n  \"business_id\": \"{{businessId}}\",\n  \"branch_id\": \"{{branchId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/visa",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "visa"]
+            }
+          }
+        },
+        {
+          "name": "Update Visa",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Processing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/visa/{{visaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "visa", "{{visaId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Visa Status",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/recruitment/visa/{{visaId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "recruitment", "visa", "{{visaId}}", "status"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

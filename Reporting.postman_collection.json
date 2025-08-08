@@ -1,0 +1,290 @@
+{
+  "info": {
+    "name": "Reporting & Analytics",
+    "_postman_id": "33cc44dd-55ee-66ff-00aa-112233445566",
+    "description": "Reporting APIs: HR KPIs, custom reports, compliance reports, dashboards & widgets, export data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "kpiId", "value": "00000000-0000-0000-0000-000000010001" },
+    {
+      "key": "customReportId",
+      "value": "00000000-0000-0000-0000-000000010002"
+    },
+    {
+      "key": "complianceReportId",
+      "value": "00000000-0000-0000-0000-000000010003"
+    },
+    { "key": "widgetId", "value": "00000000-0000-0000-0000-000000010004" },
+    { "key": "userId", "value": "00000000-0000-0000-0000-000000000999" }
+  ],
+  "item": [
+    {
+      "name": "HR KPIs",
+      "item": [
+        {
+          "name": "List KPIs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/kpis",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "kpis"]
+            }
+          }
+        },
+        {
+          "name": "Create KPI",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Turnover Rate\",\n  \"description\": \"Monthly turnover rate\",\n  \"formula\": \"(leavers/avg_headcount)*100\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/kpis",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "kpis"]
+            }
+          }
+        },
+        {
+          "name": "Get KPI",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/kpis/{{kpiId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "kpis", "{{kpiId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update KPI",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Monthly turnover rate (all branches)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/kpis/{{kpiId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "kpis", "{{kpiId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Custom Reports",
+      "item": [
+        {
+          "name": "List Custom Reports",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/custom",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "custom"]
+            }
+          }
+        },
+        {
+          "name": "Create Custom Report",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Absence by Department\",\n  \"description\": \"Absence days grouped by department\",\n  \"query_definition\": \"SELECT department, SUM(days) AS total FROM absences GROUP BY department\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/custom",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "custom"]
+            }
+          }
+        },
+        {
+          "name": "Get Custom Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/custom/{{customReportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "custom", "{{customReportId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Custom Report",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Absence by department (monthly)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/custom/{{customReportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "custom", "{{customReportId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Compliance Reports",
+      "item": [
+        {
+          "name": "List Compliance Reports",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/compliance?type=GOSI&period=2025-08",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "compliance"],
+              "query": [
+                { "key": "type", "value": "GOSI" },
+                { "key": "period", "value": "2025-08" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Compliance Report",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"report_type\": \"Saudization\",\n  \"period\": \"2025-08\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/compliance",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "compliance"]
+            }
+          }
+        },
+        {
+          "name": "Get Compliance Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/compliance/{{complianceReportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "compliance", "{{complianceReportId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboards & Widgets",
+      "item": [
+        {
+          "name": "List Widgets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/widgets?user_id={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "widgets"],
+              "query": [{ "key": "user_id", "value": "{{userId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Create Widget",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": \"{{userId}}\",\n  \"widget_type\": \"kpi_chart\",\n  \"config\": {\"kpi_id\":\"{{kpiId}}\"},\n  \"position_x\": 0,\n  \"position_y\": 0,\n  \"width\": 4,\n  \"height\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/widgets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "widgets"]
+            }
+          }
+        },
+        {
+          "name": "Get Widget",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/widgets/{{widgetId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "widgets", "{{widgetId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Widget",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"position_x\": 1,\n  \"position_y\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/widgets/{{widgetId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "widgets", "{{widgetId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Export Data",
+      "item": [
+        {
+          "name": "Export Custom Report CSV (stub)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/export/custom/{{customReportId}}?format=csv",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "reports",
+                "export",
+                "custom",
+                "{{customReportId}}"
+              ],
+              "query": [{ "key": "format", "value": "csv" }]
+            }
+          }
+        },
+        {
+          "name": "Export Compliance Report PDF (stub)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/export/compliance/{{complianceReportId}}?format=pdf",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "reports",
+                "export",
+                "compliance",
+                "{{complianceReportId}}"
+              ],
+              "query": [{ "key": "format", "value": "pdf" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

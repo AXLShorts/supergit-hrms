@@ -1,0 +1,205 @@
+{
+  "info": {
+    "name": "Employee Self-Service (ESS)",
+    "_postman_id": "11aa22bb-33cc-44dd-88ee-99ff00112233",
+    "description": "ESS APIs: payslips/balances, requests (leave/document/loan/personal update), personal details workflow (bilingual-ready via lang param)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "employeeId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "essRequestId", "value": "00000000-0000-0000-0000-000000008001" },
+    {
+      "key": "personalUpdateId",
+      "value": "00000000-0000-0000-0000-000000008002"
+    }
+  ],
+  "item": [
+    {
+      "name": "Payslips & Leave Balances",
+      "item": [
+        {
+          "name": "Get Payslips (stub)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/payslips?employee_id={{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "payslips"],
+              "query": [{ "key": "employee_id", "value": "{{employeeId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Get Leave Balances",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/leaves/balances?employee_id={{employeeId}}&year=2025",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leaves", "balances"],
+              "query": [
+                { "key": "employee_id", "value": "{{employeeId}}" },
+                { "key": "year", "value": "2025" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ESS Requests",
+      "item": [
+        {
+          "name": "List ESS Requests",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests?employee_id={{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests"],
+              "query": [{ "key": "employee_id", "value": "{{employeeId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Create ESS Leave Request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"request_type\": \"Leave\",\n  \"request_data\": {\"leave_type_id\": \"00000000-0000-0000-0000-00000000LT01\", \"start_date\":\"2025-03-01\", \"end_date\":\"2025-03-05\"}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Create ESS Document Request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"request_type\": \"Document\",\n  \"request_data\": {\"document_name\":\"Salary Certificate\", \"language\":\"en\"}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Create ESS Loan Request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"request_type\": \"Loan\",\n  \"request_data\": {\"amount\": 5000, \"installments\": 10}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Create ESS Personal Update",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"request_type\": \"PersonalUpdate\",\n  \"request_data\": {\"field_name\":\"mobile_number\", \"new_value\":\"+966500000000\"}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Get ESS Request",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests/{{essRequestId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests", "{{essRequestId}}"]
+            }
+          }
+        },
+        {
+          "name": "Cancel ESS Request",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/requests/{{essRequestId}}/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "requests", "{{essRequestId}}", "cancel"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Personal Details Updates",
+      "item": [
+        {
+          "name": "List Personal Updates",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/personal-updates?employee_id={{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ess", "personal-updates"],
+              "query": [{ "key": "employee_id", "value": "{{employeeId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Approve Personal Update",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/personal-updates/{{personalUpdateId}}/approve",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "ess",
+                "personal-updates",
+                "{{personalUpdateId}}",
+                "approve"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reject Personal Update",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/ess/personal-updates/{{personalUpdateId}}/reject",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "ess",
+                "personal-updates",
+                "{{personalUpdateId}}",
+                "reject"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

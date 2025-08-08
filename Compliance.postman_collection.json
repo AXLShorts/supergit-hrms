@@ -1,0 +1,358 @@
+{
+  "info": {
+    "name": "Compliance & Legal (Saudi)",
+    "_postman_id": "2c5d6e7f-8a91-4b2c-9d3e-4f5a6b7c8d9e",
+    "description": "Compliance APIs: integrations config, GOSI reports, Mudad reports, Qiwa contracts, Muqeem status, labor law alerts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "integrationId", "value": "00000000-0000-0000-0000-000000005001" },
+    { "key": "gosiReportId", "value": "00000000-0000-0000-0000-000000005002" },
+    { "key": "mudadReportId", "value": "00000000-0000-0000-0000-000000005003" },
+    {
+      "key": "qiwaContractId",
+      "value": "00000000-0000-0000-0000-000000005004"
+    },
+    { "key": "muqeemCheckId", "value": "00000000-0000-0000-0000-000000005005" },
+    { "key": "alertId", "value": "00000000-0000-0000-0000-000000005006" }
+  ],
+  "item": [
+    {
+      "name": "Integration Configuration",
+      "item": [
+        {
+          "name": "List Integrations",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/integrations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "integrations"]
+            }
+          }
+        },
+        {
+          "name": "Create Integration",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"branch_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"integration_type\": \"GOSI\",\n  \"status\": \"Enabled\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/integrations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "integrations"]
+            }
+          }
+        },
+        {
+          "name": "Get Integration",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/integrations/{{integrationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "integrations", "{{integrationId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Integration",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Disabled\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/integrations/{{integrationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "integrations", "{{integrationId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GOSI Reports",
+      "item": [
+        {
+          "name": "List GOSI Reports",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/gosi/reports?month=2025-08",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "gosi", "reports"],
+              "query": [{ "key": "month", "value": "2025-08" }]
+            }
+          }
+        },
+        {
+          "name": "Generate GOSI Report (stub)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"branch_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"month\": \"2025-08\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/gosi/reports/generate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "gosi", "reports", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Get GOSI Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/gosi/reports/{{gosiReportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "compliance",
+                "gosi",
+                "reports",
+                "{{gosiReportId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mudad Reports",
+      "item": [
+        {
+          "name": "List Mudad Reports",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/mudad/reports?wage_month=2025-08",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "mudad", "reports"],
+              "query": [{ "key": "wage_month", "value": "2025-08" }]
+            }
+          }
+        },
+        {
+          "name": "Generate Mudad Report (stub)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"branch_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"wage_month\": \"2025-08\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/mudad/reports/generate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "mudad", "reports", "generate"]
+            }
+          }
+        },
+        {
+          "name": "Get Mudad Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/mudad/reports/{{mudadReportId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "compliance",
+                "mudad",
+                "reports",
+                "{{mudadReportId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Qiwa Contracts",
+      "item": [
+        {
+          "name": "List Contracts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/qiwa/contracts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "qiwa", "contracts"]
+            }
+          }
+        },
+        {
+          "name": "Create Contract (stub)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"business_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"branch_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"saudi_national\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/qiwa/contracts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "qiwa", "contracts"]
+            }
+          }
+        },
+        {
+          "name": "Get Contract",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/qiwa/contracts/{{qiwaContractId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "compliance",
+                "qiwa",
+                "contracts",
+                "{{qiwaContractId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Contract Status",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/qiwa/contracts/{{qiwaContractId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "compliance",
+                "qiwa",
+                "contracts",
+                "{{qiwaContractId}}",
+                "status"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Muqeem Iqama Status",
+      "item": [
+        {
+          "name": "List Status Checks",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/muqeem/checks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "muqeem", "checks"]
+            }
+          }
+        },
+        {
+          "name": "Create Status Check (stub)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"iqama_number\": \"1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/muqeem/checks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "muqeem", "checks"]
+            }
+          }
+        },
+        {
+          "name": "Get Status Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/muqeem/checks/{{muqeemCheckId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "compliance",
+                "muqeem",
+                "checks",
+                "{{muqeemCheckId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Labor Law Alerts",
+      "item": [
+        {
+          "name": "List Alerts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/alerts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "alerts"]
+            }
+          }
+        },
+        {
+          "name": "Create Alert",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"branch_id\": \"00000000-0000-0000-0000-000000000001\",\n  \"alert_type\": \"Document Expiry\",\n  \"description\": \"Iqama expiring soon\",\n  \"trigger_date\": \"2025-02-20\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/alerts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "alerts"]
+            }
+          }
+        },
+        {
+          "name": "Get Alert",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/alerts/{{alertId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "alerts", "{{alertId}}"]
+            }
+          }
+        },
+        {
+          "name": "Resolve Alert",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"resolved\": true\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/api/compliance/alerts/{{alertId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "compliance", "alerts", "{{alertId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

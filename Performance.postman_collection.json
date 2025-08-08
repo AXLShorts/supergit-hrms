@@ -1,0 +1,313 @@
+{
+  "info": {
+    "name": "Performance Management",
+    "_postman_id": "9a6b3c2d-4e5f-4d31-a2b3-1c2d3e4f5a6b",
+    "description": "Performance module APIs: goals/KPIs, 360 feedback, appraisals, PIP, merit recommendations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "goalId", "value": "00000000-0000-0000-0000-000000003001" },
+    { "key": "feedbackId", "value": "00000000-0000-0000-0000-000000003002" },
+    { "key": "appraisalId", "value": "00000000-0000-0000-0000-000000003003" },
+    { "key": "pipId", "value": "00000000-0000-0000-0000-000000003004" },
+    {
+      "key": "recommendationId",
+      "value": "00000000-0000-0000-0000-000000003005"
+    }
+  ],
+  "item": [
+    {
+      "name": "Goals & KPIs",
+      "item": [
+        {
+          "name": "List Goals",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/goals",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "goals"]
+            }
+          }
+        },
+        {
+          "name": "Create Goal",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"title\": \"Increase Sales\",\n  \"kpi_metric\": \"Monthly Sales\",\n  \"target_value\": 100.0,\n  \"period_start\": \"2025-01-01\",\n  \"period_end\": \"2025-06-30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/goals",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "goals"]
+            }
+          }
+        },
+        {
+          "name": "Get Goal",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/goals/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "goals", "{{goalId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Goal",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"achieved_value\": 80.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/goals/{{goalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "goals", "{{goalId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "360 Feedback",
+      "item": [
+        {
+          "name": "List Feedback",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "feedback"]
+            }
+          }
+        },
+        {
+          "name": "Create Feedback",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"role\": \"Manager\",\n  \"feedback_text\": \"Great work\",\n  \"rating\": 4.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "feedback"]
+            }
+          }
+        },
+        {
+          "name": "Get Feedback",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/feedback/{{feedbackId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "feedback", "{{feedbackId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Feedback",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"rating\": 4.75\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/feedback/{{feedbackId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "feedback", "{{feedbackId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appraisals",
+      "item": [
+        {
+          "name": "List Appraisals",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/appraisals",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "appraisals"]
+            }
+          }
+        },
+        {
+          "name": "Create Appraisal",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"cycle_name\": \"H1-2025\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/appraisals",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "appraisals"]
+            }
+          }
+        },
+        {
+          "name": "Get Appraisal",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/appraisals/{{appraisalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "appraisals", "{{appraisalId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Appraisal",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Finalized\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/appraisals/{{appraisalId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "appraisals", "{{appraisalId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance Improvement Plans (PIP)",
+      "item": [
+        {
+          "name": "List PIPs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/pip",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "pip"]
+            }
+          }
+        },
+        {
+          "name": "Create PIP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"reason\": \"Targets missed\",\n  \"start_date\": \"2025-02-01\",\n  \"end_date\": \"2025-04-30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/pip",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "pip"]
+            }
+          }
+        },
+        {
+          "name": "Get PIP",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/pip/{{pipId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "pip", "{{pipId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update PIP",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/pip/{{pipId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "pip", "{{pipId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Merit Recommendations",
+      "item": [
+        {
+          "name": "List Recommendations",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/merit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "merit"]
+            }
+          }
+        },
+        {
+          "name": "Create Recommendation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"00000000-0000-0000-0000-000000000000\",\n  \"merit_type\": \"Bonus\",\n  \"amount\": 1000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/merit",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "merit"]
+            }
+          }
+        },
+        {
+          "name": "Get Recommendation",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/merit/{{recommendationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "merit", "{{recommendationId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Recommendation",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/performance/merit/{{recommendationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "performance", "merit", "{{recommendationId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "info": {
+    "name": "Training & Development",
+    "_postman_id": "7b3c2d4e-5f6a-4712-b3c4-2d3e4f5a6b7c",
+    "description": "Training module APIs: programs, requests, skills, certifications, feedback",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "programId", "value": "00000000-0000-0000-0000-000000004001" },
+    { "key": "requestId", "value": "00000000-0000-0000-0000-000000004002" },
+    { "key": "skillId", "value": "00000000-0000-0000-0000-000000004003" },
+    { "key": "certificateId", "value": "00000000-0000-0000-0000-000000004004" },
+    { "key": "feedbackId", "value": "00000000-0000-0000-0000-000000004005" },
+    { "key": "employeeId", "value": "00000000-0000-0000-0000-000000000000" }
+  ],
+  "item": [
+    {
+      "name": "Programs",
+      "item": [
+        {
+          "name": "List Programs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/programs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "programs"]
+            }
+          }
+        },
+        {
+          "name": "Create Program",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title_en\": \"Safety 101\",\n  \"title_ar\": \"السلامة 101\",\n  \"type\": \"Internal\",\n  \"start_date\": \"2025-01-10\",\n  \"end_date\": \"2025-01-12\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/programs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "programs"]
+            }
+          }
+        },
+        {
+          "name": "Get Program",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/programs/{{programId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "programs", "{{programId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Program",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": \"Riyadh HQ\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/programs/{{programId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "programs", "{{programId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Requests",
+      "item": [
+        {
+          "name": "List Requests",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Create Request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"program_id\": \"{{programId}}\",\n  \"request_type\": \"Self-Request\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "requests"]
+            }
+          }
+        },
+        {
+          "name": "Get Request",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/requests/{{requestId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "requests", "{{requestId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Request",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/requests/{{requestId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "requests", "{{requestId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Skills",
+      "item": [
+        {
+          "name": "List Skills",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/skills?employee_id={{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "skills"],
+              "query": [{ "key": "employee_id", "value": "{{employeeId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Create Skill",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"skill_name\": \"Go\",\n  \"skill_level\": \"Intermediate\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/skills",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "skills"]
+            }
+          }
+        },
+        {
+          "name": "Get Skill",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/skills/{{skillId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "skills", "{{skillId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Skill",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skill_level\": \"Advanced\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/skills/{{skillId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "skills", "{{skillId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Certifications",
+      "item": [
+        {
+          "name": "List Certifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/certifications?employee_id={{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "certifications"],
+              "query": [{ "key": "employee_id", "value": "{{employeeId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Create Certification",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"certificate_name\": \"PMP\",\n  \"issuer\": \"PMI\",\n  \"issue_date\": \"2024-02-01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/certifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "certifications"]
+            }
+          }
+        },
+        {
+          "name": "Get Certification",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/certifications/{{certificateId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "certifications", "{{certificateId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Certification",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"verified\": true\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/certifications/{{certificateId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "certifications", "{{certificateId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Feedback",
+      "item": [
+        {
+          "name": "List Training Feedback",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/feedback?program_id={{programId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "feedback"],
+              "query": [{ "key": "program_id", "value": "{{programId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Create Training Feedback",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"{{employeeId}}\",\n  \"program_id\": \"{{programId}}\",\n  \"rating\": 4.8,\n  \"comments\": \"Very useful\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/training/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "feedback"]
+            }
+          }
+        },
+        {
+          "name": "Get Training Feedback",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/training/feedback/{{feedbackId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "training", "feedback", "{{feedbackId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
