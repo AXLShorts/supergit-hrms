@@ -53,6 +53,7 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Navbar } from "./navbar";
 
 const adminNavItems = [
   {
@@ -154,6 +155,8 @@ function AppSidebar() {
 
   const navItems = isAdmin(user) ? adminNavItems : employeeNavItems;
 
+  console.log("dir", dir);
+
   return (
     <Sidebar variant="inset" side={dir === "rtl" ? "right" : "left"}>
       <SidebarHeader>
@@ -204,33 +207,63 @@ function AppSidebar() {
                       dir === "rtl" && "flex-row-reverse justify-end"
                     )}
                   >
-                    <Link
-                      href={item.url}
-                      className={cn(
-                        "flex items-center gap-3 w-full",
-                        dir === "rtl" && "flex-row-reverse justify-end"
-                      )}
-                    >
-                      <div
+                    {dir === "rtl" ? (
+                      <Link
+                        href={item.url}
                         className={cn(
-                          "flex aspect-square size-8 items-center justify-center rounded-full transition-colors",
-                          pathname === item.url
-                            ? "bg-primary text-white"
-                            : "bg-sidebar-icon-bg text-white"
+                          "flex flex-row items-center gap-3 w-full justify-end"
                         )}
                       >
-                        <item.icon className="size-4" />
-                      </div>
-                      <span
+                        <span
+                          className={cn(
+                            "truncate text-right",
+                            pathname === item.url
+                              ? "text-primary"
+                              : "text-white"
+                          )}
+                        >
+                          {t(item.title)}
+                        </span>
+                        <div
+                          className={cn(
+                            "flex aspect-square size-8 items-center justify-center rounded-full transition-colors",
+                            pathname === item.url
+                              ? "bg-primary text-white"
+                              : "bg-sidebar-icon-bg text-white"
+                          )}
+                        >
+                          <item.icon className="size-4" />
+                        </div>
+                      </Link>
+                    ) : (
+                      <Link
+                        href={item.url}
                         className={cn(
-                          "truncate",
-                          dir === "rtl" && "text-right",
-                          pathname === item.url ? "text-primary" : "text-white"
+                          "flex flex-row items-center gap-3 w-full"
                         )}
                       >
-                        {t(item.title)}
-                      </span>
-                    </Link>
+                        <div
+                          className={cn(
+                            "flex aspect-square size-8 items-center justify-center rounded-full transition-colors",
+                            pathname === item.url
+                              ? "bg-primary text-white"
+                              : "bg-sidebar-icon-bg text-white"
+                          )}
+                        >
+                          <item.icon className="size-4" />
+                        </div>
+                        <span
+                          className={cn(
+                            "truncate",
+                            pathname === item.url
+                              ? "text-primary"
+                              : "text-white"
+                          )}
+                        >
+                          {t(item.title)}
+                        </span>
+                      </Link>
+                    )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -239,7 +272,7 @@ function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
@@ -358,7 +391,7 @@ function AppSidebar() {
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarFooter>
+      </SidebarFooter> */}
       <SidebarRail />
     </Sidebar>
   );
@@ -372,16 +405,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-            <div
-              className={cn(
-                "flex items-center gap-2 px-4",
-                dir === "rtl" && "flex-row-reverse"
-              )}
-            >
-              <SidebarTrigger className="-ml-1" />
-            </div>
-          </header>
+          <Navbar />
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
         </SidebarInset>
       </SidebarProvider>
